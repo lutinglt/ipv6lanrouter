@@ -1,0 +1,36 @@
+services:
+  ipv6lanrouter:
+    image: lutinglt/ipv6lanrouter:latest
+    container_name: ipv6lanrouter
+    hostname: ipv6lanrouter
+    restart: on-failure
+#    networks:
+# macvlan is WAN
+#      macvlan:
+#        ipv4_address: *.*.*.*
+# bridge is LAN
+#      bridge1:
+#        ipv4_address: *.*.*.*
+#      bridge2:
+#        ipv4_address: *.*.*.*
+#      bridge3:
+#        ipv4_address: *.*.*.*
+    environment:
+#      - TZ=Asia/Shanghai
+#      - CHECK=3
+#      - LAN_MODE=docker
+#      - PREFIXLEN=60
+#      - MTU=0
+#      - RDNSS=*:*:*:*;*:*:*:*;
+#      - EXCLUDE_SUB=00;01;02;03;...;
+#      - EXCLUDE_NUM1=0;1;2;3;...;
+#      - EXCLUDE_NUM2=0;1;2;3;...;
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - "net.ipv6.conf.all.forwarding=1"
+      - "net.ipv6.conf.all.proxy_ndp=1"
+      - "net.ipv6.conf.all.accept_ra=2"
+      - "net.ipv6.conf.default.forwarding=1"
+      - "net.ipv6.conf.default.proxy_ndp=1"
+      - "net.ipv6.conf.default.accept_ra=2"
