@@ -71,15 +71,15 @@ services:
 
 ### PREFIXLEN && LAN_MODE
 
-Only prefix lengths 56-64 are supported.
+- Only prefix lengths 56-64 are supported.
 
-If the `PREFIXLEN` is not 64, the WAN port address will be excluded from the subnet address pool and then the LAN port address will be assigned.
+- If the `PREFIXLEN` is not 64, the WAN port address will be excluded from the subnet address pool and then the LAN port address will be assigned.
 
-If the `PREFIXLEN` is 64, the default LAN ports are all Docker bridge networks, and the IPv6 subnet address and prefix length are calculated based on the MAC address assigned to the IPv4 prefix length of the bridge network in Docker 26.0.0. (Linux stateless IPv6 addresses are calculated by default using EUI64).
+- If the `PREFIXLEN` is 64, the default LAN ports are all Docker bridge networks, and the IPv6 subnet address and prefix length are calculated based on the MAC address assigned to the IPv4 prefix length of the bridge network in Docker 26.0.0. (Linux stateless IPv6 addresses are calculated by default using EUI64).
 
 > If the IPv6 address is not EUI64-generated, linux can use EUI64 to calculate the IPv6 address by setting the kernel parameter `net.ipv6.conf.all.addr_gen_mode=0` `net.ipv6.conf.default.addr_gen_mode=0`.
 
-In case of 64-bit prefix length, if `LAN_MODE` is set to `net` or any other value, only one LAN is supported and there is no communication between LAN port LAN and WAN port LAN.
+- In case of 64-bit prefix length, if `LAN_MODE` is set to `net` or any other value, only one LAN is supported and there is no communication between LAN port LAN and WAN port LAN.
 
 | PREFIXLEN | WANIP (Example)          | Subnet Address Pool |
 | --------- | ------------------------ | ------------------- |
