@@ -30,24 +30,20 @@ services:
     networks:
 #  macvlan is WAN(Interfaces capable of obtaining IPv6 global addresses)
       macvlan:
-        ipv4_address: *.*.*.*
 #  bridge is LAN(Interfaces that cannot obtain IPv6 global addresses)
       bridge1:
-        ipv4_address: *.*.*.*
       bridge2:
-        ipv4_address: *.*.*.*
       bridge3:
-        ipv4_address: *.*.*.*
    environment:
       - TZ=Asia/Shanghai
-      - CHECK=3
-      - LAN_MODE=docker
-      - PREFIXLEN=60
-      - MTU=0
-      - RDNSS=*:*:*:*;*:*:*:*;
-      - EXCLUDE_SUB=00;01;02;03;...;
-      - EXCLUDE_NUM1=0;1;2;3;...;
-      - EXCLUDE_NUM2=0;1;2;3;...;
+#      - CHECK=3
+#      - LAN_MODE=docker
+#      - PREFIXLEN=60
+#      - MTU=0
+#      - RDNSS=*:*:*:*;*:*:*:*;
+#      - EXCLUDE_SUB=00;01;02;03;...;
+#      - EXCLUDE_NUM1=0;1;2;3;...;
+#      - EXCLUDE_NUM2=0;1;2;3;...;
     cap_add:
       - NET_ADMIN
     sysctls:
