@@ -13,7 +13,7 @@ Assign IPv6 addresses to networks that can't get IPv6 addresses, redistribute IP
 - [x] Supports recognizing dynamic prefix of WAN port and modifying LAN prefix automatically.
 - [x] Stateless only
 - [x] No PD server required, inter-subnet routing
-- [x] LAN interface IPv6 prefix matches IPv4 and MAC address assignment rules for Docker 26.0.0
+- [x] LAN interface IPv6 prefix matches IPv4 and MAC address assignment rules for Docker
 - [x] Global IPv6 addresses can be assigned to containers under a Docker bridged network
 
 ## Getting Started
@@ -75,7 +75,7 @@ services:
 
 - If the `PREFIXLEN` is not `64`, the WAN port address will be excluded from the subnet address pool and then the LAN port address will be assigned.
 
-- If the `PREFIXLEN` is `64`, the default LAN ports are all Docker bridge networks, and the IPv6 subnet address and prefix length are calculated based on the MAC address assigned to the IPv4 prefix length of the bridge network in Docker 26.0.0. (Linux stateless IPv6 addresses are calculated by default using EUI64).
+- If the `PREFIXLEN` is `64`, the default LAN ports are all Docker bridge networks, and the IPv6 subnet address and prefix length are calculated based on the MAC address assigned to the IPv4 prefix length of the bridge network in Docker. (Linux stateless IPv6 addresses are calculated by default using EUI64).
 
 > If the IPv6 address is not EUI64-generated, linux can use EUI64 to calculate the IPv6 address by setting the kernel parameter `net.ipv6.conf.all.addr_gen_mode=0` `net.ipv6.conf.default.addr_gen_mode=0`.
 
