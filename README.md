@@ -53,6 +53,20 @@ services:
       - "net.ipv6.conf.default.forwarding=1"
       - "net.ipv6.conf.default.proxy_ndp=1"
       - "net.ipv6.conf.default.accept_ra=2"
+
+networks:
+  macvlan:
+    external: true
+    name: macvlan
+  bridge1:
+    external: true
+    name: bridge1
+  bridge2:
+    external: true
+    name: bridge2
+  bridge3:
+    external: true
+    name: bridge3
 ```
 
 ## Configuration
