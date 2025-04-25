@@ -104,7 +104,7 @@ function getwan(){
   i=0
   while true; do
     for ((ii=0;ii<${#NET[@]};ii++)); do
-      ip=$(ip -j addr show ${NET[$ii]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local')
+      ip=$(ip -j addr show ${NET[$ii]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local | select(startswith("2") or startswith("3"))')
       if [[ "$ip" != "" ]]; then
         WAN=${NET[$ii]}
         LAN=(${NET[@]:0:$ii} ${NET[@]:$ii+1})
@@ -294,7 +294,7 @@ function setroute(){
   for ((i=0;i<${#LAN[@]};i++)); do
     ii=0
     while true; do
-      lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local')
+      lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local | select(startswith("2") or startswith("3"))')
       if [[ "$lan_ip" != "" ]]; then
         ip -6 neigh add proxy $lan_ip dev $WAN
         if [[ "$PREFIXLEN" == "64" ]]; then
@@ -318,7 +318,7 @@ function netinfo(){
   echo "----------------------------------------------------------------------------------------------------"
   message "INFO:  WAN: [$WAN] $wan_ip"
   for ((i=0;i<${#LAN[@]};i++)); do
-    lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local')
+    lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local | select(startswith("2") or startswith("3"))')
     message "INFO:  LAN: [${LAN[$i]}] $lan_ip"
     if [[ "$PREFIXLEN" == "64" ]]; then
       message "INFO: PRFX: [${LAN[$i]}] $lan_prefix${sub_prefix[$i]}/${v6prefixlen[$i]}"
@@ -358,7 +358,7 @@ main
 while true; do
   old_wan_ip=$wan_ip
   old_lan_prefix=$lan_prefix
-  wan_ip=$(ip -j addr show $WAN | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local')
+  wan_ip=$(ip -j addr show $WAN | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time != 0 and .family == "inet6" and .scope == "global") | .local | select(startswith("2") or startswith("3"))')
   getprefix
   if [[ "$lan_prefix" != "$old_lan_prefix" ]]; then
     echo "---------------------------------------- Process Info ----------------------------------------------"
@@ -375,7 +375,7 @@ while true; do
     # Clean Address
     ip addr del $old_wan_ip/64 dev $WAN
     for ((i=0;i<${#LAN[@]};i++)); do
-      lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time == 0 and .family == "inet6" and .scope == "global") | .local')
+      lan_ip=$(ip -j addr show ${LAN[$i]} | jq -r '.[] | .addr_info | .[] | select(.preferred_life_time == 0 and .family == "inet6" and .scope == "global") | .local | select(startswith("2") or startswith("3"))')
       if [[ "$PREFIXLEN" == "64" ]]; then
         ip route del $old_lan_prefix${sub_prefix[$i]}/${v6prefixlen[$i]} dev ${LAN[$i]}
       fi
