@@ -1,5 +1,7 @@
 # IPv6 LAN Router
 
+**新版 Docker Mac 地址无规律, 该项目已无实际意义, 请考虑其他方案, 比如桥接端口, 其他 IPv6 相关设置请参考 [官方文档](docs.docker.com)**
+
 ![Version](https://img.shields.io/docker/v/lutinglt/ipv6lanrouter/latest?arch=amd64&sort=semver&color=066da5) ![Docker Pulls](https://img.shields.io/docker/pulls/lutinglt/ipv6lanrouter.svg?style=flat&label=pulls&logo=docker) ![Docker Size](https://img.shields.io/docker/image-size/lutinglt/ipv6lanrouter/latest?color=066da5&label=size) ![License](https://img.shields.io/github/license/lutinglt/ipv6lanrouter)
 
 Assign IPv6 addresses to networks that can't get IPv6 addresses, redistribute IPv6 addresses on the LAN, and be transparent to higher-level routing.
